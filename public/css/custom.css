@@ -1,0 +1,174 @@
+/* ======================================================================
+   CUSTOM CSS — GROSIR SEMBAKO
+   ======================================================================
+   File ini dipisah dari Bootstrap CDN supaya redesign total bisa
+   dilakukan di SATU FILE ini saja, tanpa perlu menyentuh file .blade.php.
+
+   STRUKTUR FILE INI:
+   1. CSS Variables (Design Tokens)   — ubah di sini dulu, efeknya menyebar
+   2. Layout Staff (app.blade.php)    — sidebar, navbar, dashboard
+   3. Layout Pelanggan (public.blade.php)
+   4. Layout Cetak (print.blade.php)
+   5. Komponen Umum (dipakai di banyak halaman: card, table, badge, form)
+
+   CATATAN UNTUK REDESIGN:
+   - Kelas Bootstrap (card, btn, table, badge, dsb) TETAP dipakai di semua
+     file blade. Kalau mau ganti total ke framework lain, cara paling aman
+     adalah TETAP PERTAHANKAN nama class Bootstrap itu di HTML, lalu di
+     file ini styling ulang classnya (override), bukan hapus classnya.
+   - Kalau mau benar-benar lepas dari Bootstrap: cari & ganti nama class
+     di seluruh folder resources/views/, lalu tulis ulang file ini dari nol.
+   ====================================================================== */
+
+
+/* ----------------------------------------------------------------------
+   1. CSS VARIABLES (DESIGN TOKENS)
+   Ubah nilai-nilai ini dulu untuk perubahan cepat ke seluruh tampilan
+   tanpa perlu cari-cari tiap komponen satu-satu.
+---------------------------------------------------------------------- */
+:root {
+    --color-primary: #1F3864;      /* Warna utama (sidebar, tombol, header) */
+    --color-primary-light: #D9E2F3;
+    --color-success: #198754;
+    --color-danger: #dc3545;
+    --color-warning: #ffc107;
+    --color-info: #0dcaf0;
+
+    --color-bg: #f4f6f9;           /* Latar belakang halaman */
+    --color-surface: #ffffff;      /* Latar belakang card/panel */
+    --color-text: #1a1a1a;
+    --color-text-muted: #6c757d;
+    --color-border: #e0e0e0;
+
+    --font-family-base: 'Segoe UI', Arial, sans-serif;
+    --font-size-base: 14px;
+
+    --radius-base: 8px;
+    --shadow-base: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+
+/* ----------------------------------------------------------------------
+   2. LAYOUT STAFF — resources/views/layouts/app.blade.php
+   Dipakai di: dashboard, supplier, konsumen, barang, pemesanan-*,
+   pembelian, penjualan, hutang, piutang, retur-*, laporan, user
+---------------------------------------------------------------------- */
+
+/* Sidebar kiri (elemen #sidebar, class bg-dark) */
+#sidebar {
+    background-color: var(--color-primary) !important;
+}
+
+#sidebar .nav-link {
+    border-radius: var(--radius-base);
+    margin-bottom: 2px;
+    transition: background-color 0.15s ease;
+}
+
+#sidebar .nav-link:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+#sidebar .nav-link.active {
+    font-weight: 600;
+}
+
+/* Navbar atas (di dalam elemen "Main Content") */
+.navbar {
+    box-shadow: var(--shadow-base);
+}
+
+/* Body / area konten utama */
+body {
+    background-color: var(--color-bg);
+    font-family: var(--font-family-base);
+    font-size: var(--font-size-base);
+    color: var(--color-text);
+}
+
+
+/* ----------------------------------------------------------------------
+   3. LAYOUT PELANGGAN — resources/views/layouts/public.blade.php
+   Dipakai di: pesanan-publik/*, pesanan-saya/*, auth-konsumen/*
+---------------------------------------------------------------------- */
+
+/* Navbar publik (dark, di bagian atas semua halaman pelanggan) */
+.navbar.navbar-dark.bg-dark {
+    background-color: var(--color-primary) !important;
+}
+
+
+/* ----------------------------------------------------------------------
+   4. LAYOUT CETAK — resources/views/layouts/print.blade.php
+   Dipakai di: pembelian/cetak, penjualan/cetak
+   (ukuran struk ~380px, font monospace ala nota kasir)
+---------------------------------------------------------------------- */
+
+/* Sudah diatur inline di print.blade.php, silakan sesuaikan di sana
+   langsung kalau mau ubah tampilan nota (lebih mudah karena terisolasi
+   dari layout lain dan tidak saling memengaruhi). */
+
+
+/* ----------------------------------------------------------------------
+   5. KOMPONEN UMUM (dipakai berulang di banyak halaman)
+---------------------------------------------------------------------- */
+
+/* Card — dipakai di HAMPIR SEMUA halaman index/create/edit/show */
+.card {
+    border: none;
+    border-radius: var(--radius-base);
+    box-shadow: var(--shadow-base);
+}
+
+.card-header {
+    border-bottom: 1px solid var(--color-border);
+    font-weight: 600;
+}
+
+/* Tabel data — dipakai di semua halaman index (daftar data) */
+.table thead {
+    background-color: var(--color-primary-light);
+}
+
+.table th {
+    font-weight: 600;
+    color: var(--color-text);
+}
+
+/* Badge status — dipakai untuk status_bayar, status pesanan, dsb */
+.badge {
+    font-weight: 500;
+    padding: 0.4em 0.7em;
+}
+
+/* Tombol aksi di tabel (lihat/edit/hapus) */
+.btn-sm {
+    border-radius: 6px;
+}
+
+/* Widget angka besar di Dashboard (Total Barang, Total Hutang, dsb) */
+.card.text-bg-primary,
+.card.text-bg-success,
+.card.text-bg-warning,
+.card.text-bg-danger {
+    border-radius: var(--radius-base);
+}
+
+/* Form input — dipakai di semua halaman create/edit */
+.form-control,
+.form-select {
+    border-radius: 6px;
+    border-color: var(--color-border);
+}
+
+.form-control:focus,
+.form-select:focus {
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 0.2rem rgba(31, 56, 100, 0.15);
+}
+
+/* Alert (pesan sukses/error) */
+.alert {
+    border: none;
+    border-radius: var(--radius-base);
+}
