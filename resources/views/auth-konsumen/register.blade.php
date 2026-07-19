@@ -2,12 +2,12 @@
 @section('title', 'Daftar Akun')
 
 @section('content')
-<div class="container py-2"> <!-- py-5 diubah ke py-2 untuk hemat ruang -->
+<div class="container py-2"> 
     <div class="row justify-content-center align-items-center" style="min-height: 85vh;">
-        <div class="col-md-6 col-lg-4"> <!-- Lebar dipersempit agar lebih padat -->
+        <div class="col-md-6 col-lg-4">
             
             <div class="card border-0 shadow-lg rounded-4 overflow-hidden">
-                <div class="card-body p-4"> <!-- p-sm-5 dipadatkan menjadi p-4 -->
+                <div class="card-body p-4">
                     
                     <!-- Header -->
                     <div class="text-center mb-3">
@@ -28,7 +28,7 @@
                     <form action="{{ route('konsumen.register.store') }}" method="POST">
                         @csrf
                         
-                        <!-- Input fields dimampatkan (mb-3 jadi mb-2) -->
+                        <!-- Input fields -->
                         <div class="mb-2">
                             <label class="form-label fw-bold text-secondary small mb-0">Nama</label>
                             <input type="text" name="nama_konsumen" value="{{ old('nama_konsumen') }}" class="form-control form-control-sm bg-light border-0 rounded-3 shadow-none" required autofocus>
